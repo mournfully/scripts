@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-# https://stackoverflow.com/questions/5566310/how-to-recursively-find-and-list-the-latest-modified-files-in-a-directory-with-s
-rg --files "$1" -0 | xargs -0r stat --format '%Y :%n' | sort -nr | cut -d: -f2- | head

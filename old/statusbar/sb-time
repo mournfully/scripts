@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-source sb-colour-scheme
-base=$col_white
-col_timestamp_date=$col_rosewater
-
-# 01:01 AM EDT
-printf "^c$col_timestamp_date^󰥔 ^c$base^%s" "$(date '+%I:%M:%S %p %Z')" 
