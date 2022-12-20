@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+# https://github.com/Bugswriter/pirokit/blob/main/pirokit
+echo "start prog"
+mkdir -p $HOME/.cache/copy-bash-completions
+baseurl="https://archlinux.org/packages/?sort=&q="
+cachedir="$HOME/.cache/copy-bash-completions"
+
+query_arch() {
+    echo "searching for pkg"
+    # if no argument - ask through dmenu
+    if [ -z $input ]; then
+        # query=$(echo "" | dmenu -i -fn 'JetBrainsMono Nerd Font:style:regular:size=11' -nb '#232634' -nf '#edeff1' -sb '#edeff1' -sf '#232634' -p 'search for package:')
+        echo "missing input" && exit 0
+    else
+        echo "found input"
+        query=$input
+    fi
+    
+   query="$(sed 's/ /+/g' <<<$query)"
+
+    echo "grabbing matches"
+    curl -s "${baseurl}${query}" > $cachedir/tmp.html
+}
+
+fuzzy_finder() {
+    query_arch    
+    
+    echo "getting package names"
+    grep -o '<td><a href="/packages/.*</a></td>' $cachedir/tmp.html | sed 's/<[^>]*>//g' > $cachedir/package-names.mm
+     
+    echo "checking for results"
+    result_count=$(wc -l $cachedir/package-names.mm | awk '{print $1}')
+    echo $result_count
+    if [ "$result_count" -lt 1 ]; then
+        echo "no results found - try again"
+        exit 0
+    elif [
+    else
+        output="$(cat $cachedir/package-names.mm)"
+        echo "attempting to removing duplicats"
+        sort $output | uniq > $cachedir/package-names.mm
+        echo $output
+        
+        echo "pick an exact match"
+        exact_finder
+    fi
+}
+
+exact_finder() {
+    grep -o '<td><a href="/packages/.*</a></td>' $cachedir/tmp.html | grep -o "/$input/ "
+}
+
+subcommand=$1
+input=$2
+case "$subcommand" in
+    "-ff") fuzzy_finder ;;
+    "-ef") exact_finder ;;
+    *) echo "options: -ff <package name> -ef <package name>"
+esac
+echo "end prog"

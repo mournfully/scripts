@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+run_music() {
+    local url="$1"
+    mpv --no-video --shuffle --volume=60 $url
+}
+
+chosen=$1
+case $chosen in
+    "playlist") run_music "https://youtube.com/playlist?list=PL9Ab4rBkjKBZ8BJ5ddguWq2jpFbzJ1Rrl" ;; # songs i sorta kinda like
+    "cyberpunk") run_music "https://www.youtube.com/watch?v=czqW-wlaZ-w" ;; # cyberpunk - i really want to stay at your home
+    "play") run_music $2 ;; # play url from 2nd argument
+    # "classical") run_music "" ;;
+    "") echo "no options chosen" ;;
+    *) echo "invalid input"
+esac
