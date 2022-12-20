@@ -2,6 +2,7 @@
 # https://github.com/jdpedersen1/scripts/blob/main/dmenu/edit_configs.sh
 
 options=("alacritty
+chezmoi
 dwm
 nvim
 statusbar
@@ -17,6 +18,7 @@ choice="$(echo -e "${options[@]}" | fzf --prompt="Select a File : " --border=rou
 case "$choice" in
     quit) echo "Program terminated." && exit 1 ;;
     alacritty) choice="${XDG_CONFIG_HOME}/alacritty/alacritty.yml" ;;
+		chezmoi) choice="~/.local/share/chezmoi/" ;;
     dwm) choice="${XDG_CONFIG_HOME}/dwm/config.h" ;;
 		nvim) choice="${XDG_CONFIG_HOME}/nvim/init.vim" ;;
     statusbar) choice="$HOME/.local/bin/dwm/config" ;;
