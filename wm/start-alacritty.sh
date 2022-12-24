@@ -5,9 +5,9 @@ monitor=$(xrandr --listactivemonitors | grep -m 1 'Monitors:' | awk '{print $2}'
 # echo $monitor
 
 case "$monitor" in
-    "") echo "No option chosen";;
-    "1") font_size="5.0";;
-    "2") font_size="11.0";;
+    "") echo "No option chosen" ;;
+    "1") font_size="5.0" ;;
+    "2") font_size="11.0" ;;
 esac
 # echo $font_size
 

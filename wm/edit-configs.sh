@@ -30,4 +30,4 @@ case "$choice" in
     *) exit 1 ;;
 esac
 
-devour alacritty -e nvim -u "${XDG_CONFIG_HOME}/nvim/init.vim" "$choice"
+nvim -u "${XDG_CONFIG_HOME}/nvim/init.vim" "$choice"
