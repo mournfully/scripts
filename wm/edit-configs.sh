@@ -9,6 +9,7 @@ statusbar
 sxhkd
 tmux
 xresources
+xinitrc
 zshrc
 zshenv
 quit")
@@ -24,7 +25,8 @@ case "$choice" in
     statusbar) choice="$HOME/.local/bin/dwm/config" ;;
 		sxhkd) choice="${XDG_CONFIG_HOME}/sxhkd/sxhkdrc" ;;
     tmux) choice="${XDG_CONFIG_HOME}/tmux/tmux.conf" ;;
-    xresources) choice="${XDG_CONFIG_HOME}/X11/.Xresources" ;;
+		xinitrc) choice="$HOME/.xinitrc" ;;
+		xresources) choice="${XDG_CONFIG_HOME}/X11/.Xresources" ;;
     zshrc) choice="${XDG_CONFIG_HOME}/zsh/.zshrc" ;;
     zshenv) choice="$HOME/.zshenv" ;;
     *) exit 1 ;;
